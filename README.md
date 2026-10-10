@@ -1,49 +1,37 @@
-# ToDoList Project with Flater Framework
+# Task list with Flutter and Firebase
 
-## Overview
+A small Flutter/Dart prototype with email/password authentication screens and a Firestore-backed task list.
 
-This toDoList project is a simple task management application built on the Flater framework. Flater is a lightweight and efficient framework for developing web applications, offering a seamless development experience with its minimalistic design and robust features.
+This repository uses Flutter, not Node.js. The C++ platform-runner files are part of its desktop scaffolding; the application UI and task logic are in `lib/`.
 
-## Features
+## Implemented flow
 
-- **Task Management**: Easily add, edit, and delete tasks to keep track of your to-do list.
-- **Priority Levels**: Assign priority levels to tasks for better organization and focus.
-- **User-Friendly Interface**: The application provides an intuitive and user-friendly interface for a smooth experience.
-- **Responsive Design**: Access your to-do list from any device with a responsive design that adapts to different screen sizes.
+- Registration and sign-in screens using Firebase Authentication.
+- A live task list driven by Firestore snapshots.
+- Task creation and deletion, including swipe-to-delete.
+- A simple Flutter interface with named routes.
 
-## Getting Started
+## Code walkthrough
 
-### Prerequisites
+- [Application startup](lib/main.dart): Firebase initialization and routes.
+- [Sign-in screen](lib/pages/login.dart).
+- [Registration screen](lib/pages/registration.dart).
+- [Task list](lib/pages/home.dart): Firestore subscription and mutations.
+- [Dependencies](pubspec.yaml): Flutter, Firebase and email validation.
 
-- Node.js: Ensure that Node.js is installed on your machine. You can download it [here](https://nodejs.org/).
+## Local setup
 
-### Installation
+Use Flutter with a Dart version compatible with the constraint in `pubspec.yaml`.
 
-1. **Clone the repository:**
+1. Run `flutter pub get`.
+2. Configure your own Firebase development project and supported target platforms. Replace the checked-in example configuration with your own configuration.
+3. Enable email/password authentication and set up Firestore with appropriate access rules.
+4. Run `flutter run` on a configured device or emulator.
 
-   ```bash
-   git clone https://github.com/mrdamos69/todolist.git
+Do not test against someone else's Firebase resources or store personal data in an unreviewed development database.
 
-2. **Navigate to the project directory:**
+## Prototype boundaries
 
-    ```bash
-    cd toDoList
+The published task screen reads a shared `items` collection; it does not implement per-user task ownership. Its menu's sign-out action changes routes rather than explicitly ending the Firebase session. These behaviors need work before treating it as a private, multi-user application.
 
-3. **Install dependencies:**
-
-    ```bash
-    npm install
-
-4. **Start the application:**
-
-    ```bash
-    npm start
-
-The application will be accessible at http://localhost:3000 by default.
-
-## Usage
-
-1. Open the application in your preferred web browser.
-2. Add tasks using the input field and press Enter.
-3. Edit or delete tasks by clicking on the respective icons.
-4. Set priority levels for tasks to prioritize your to-do list.
+Task priorities and editing are not implemented in the displayed task flow. This is an earlier learning project, not a production task-management service.
